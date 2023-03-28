@@ -1,0 +1,40 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block body %}
+
+    <div>
+        {{body|safe}} 
+    </div>
+
+    <div class="flex-container">
+        <div class="item">
+            <form action = "{% url 'edit' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="edit_title" value="{{title}}">
+                <input type="submit" name="edit-btn" value="Edit" class="btn btn-warning">
+
+            </form>
+        </div>
+        <div class="item">
+            <form action = "{% url 'delete' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="delete_title" value="{{title}}">
+                <input type="submit" name="delete-btn" value="Delete" class="btn btn-danger">
+
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div>
+        <a href="{% url 'index' %}">
+            <button type="button" class="btn btn-primary item" >
+                Back to Index
+            </button>
+        </a>
+    </div>
+
+{% endblock %}
